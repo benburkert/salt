@@ -140,6 +140,7 @@ def present(
                 port=port,
                 enc=enc,
                 config=config,
+                hash_hostname=hash_hostname,
                 hash_known_hosts=hash_known_hosts)
     if result['status'] == 'exists':
         return dict(ret,
