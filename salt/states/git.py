@@ -495,6 +495,7 @@ def latest(name,
 
     if bare:
         remote_rev = None
+        remote_rev_type = None
     else:
         if rev == 'HEAD':
             if 'HEAD' in all_remote_refs:
@@ -535,6 +536,7 @@ def latest(name,
                 remote_rev_type = 'sha1'
             else:
                 remote_rev = None
+                remote_rev_type = None
 
     if remote_rev is None and not bare:
         if rev != 'HEAD':
@@ -564,7 +566,7 @@ def latest(name,
             all_local_tags = __salt__['git.list_tags'](target, user=user)
             local_rev, local_branch = _get_local_rev_and_branch(target, user)
 
-            if remote_rev is None and local_rev is not None:
+            if remote_rev is None and local_rev is not None and not bare:
                 return _fail(
                     ret,
                     'Remote repository is empty, cannot update from a '
